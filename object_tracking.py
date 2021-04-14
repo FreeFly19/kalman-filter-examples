@@ -28,6 +28,7 @@ kf.measurementNoiseCov = np.eye(4).astype(np.float32) * 50
 hog = cv2.HOGDescriptor()
 hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector()) # Alien?
 
+# Link to download the video https://ssyoutube.com/watch?v=gFy6LVlNc6c
 video_capture = cv2.VideoCapture('alien.mp4')
 video_capture.set(cv2.CAP_PROP_POS_FRAMES, 130)
 
@@ -52,7 +53,7 @@ while True:
     if state[0] != 0:
         if kf.errorCovPost.sum() < 100000:
             left, top, right, bottom = state[0], state[1], state[0] + state[4], state[1] + state[5]
-            # cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), int(20 - (kf.errorCovPost.sum() / 100000) * 20))
+            cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), int(20 - (kf.errorCovPost.sum() / 100000) * 20))
 
     cv2.imshow("Tracker", frame)
     cv2.waitKey(10)
